@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  # metadados do deployment
+  labels:
+    app: nginx-deployment
+    fruta: banana
+  name: nginx-deployment
+  namespace: day3
+spec: # especificações do deployment
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  strategy: # estratégia de atualização
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # vai criar 1 pod extra durante a atualização
+      maxUnavailable: 3 # vai atualizar de 2 em 2 pods  
+  template: # modelo do pod
+    metadata:
+      labels:
+        app: nginx
+    spec: # especificações do pod
+      containers:
+      - image: nginx:1.17.0
+        name: nginx
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: "0.9"
+          requests:
+            memory: 64Mi
+            cpu: "0.4"
+        ports:
+        - containerPort: 80
