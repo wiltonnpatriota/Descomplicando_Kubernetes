@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  author: wiltonn
+  description: Role para atualizar patches do Windows e reiniciar se necessário.
+  license: MIT
+  min_ansible_version: 2.9
+dependencies: []

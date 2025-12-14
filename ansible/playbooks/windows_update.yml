@@ -1,0 +1,9 @@
+---
+- name: Patch Windows hosts
+  hosts: windows
+  gather_facts: no
+  vars:
+    # sobrescreva se necessário
+    windows_update_allow_reboot: true
+  roles:
+    - windows_patch

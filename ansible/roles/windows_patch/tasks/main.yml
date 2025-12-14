@@ -1,0 +1,24 @@
+---
+- name: Instalar atualizações do Windows (categorias configuráveis)
+  win_updates:
+    category_names: "{{ windows_update_categories }}"
+    kb_filter: "{{ windows_update_kb_filter | default(omit) }}"
+    update_source: "{{ windows_update_source }}"
+    reboot: no
+  register: win_updates_result
+
+- name: Reiniciar se necessário
+  win_reboot:
+    reboot_timeout: "{{ windows_update_reboot_timeout }}"
+  when: win_updates_result.reboot_required and windows_update_allow_reboot
+
+- name: Aguardar conexão WinRM após reboot
+  wait_for_connection:
+    timeout: "{{ (windows_update_reboot_timeout | int) + 120 }}"
+  when: win_updates_result.reboot_required and windows_update_allow_reboot
+
+- name: Resumo das atualizações
+  debug:
+    msg:
+      - "Updates installed: {{ win_updates_result.updates | default([]) | length }}"
+      - "Reboot required: {{ win_updates_result.reboot_required | default(false) }}"

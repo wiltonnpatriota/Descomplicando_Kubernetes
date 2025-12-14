@@ -1,0 +1,17 @@
+---
+# Categorias padrão de atualizações (pode ajustar conforme necessidade)
+windows_update_categories:
+  - "Critical Updates"
+  - "Security Updates"
+
+# Filtrar por KB (vazio = não filtrar)
+windows_update_kb_filter: ""
+
+# Fonte das atualizações (por ex. 'windows', 'microsoft' ou 'auto')
+windows_update_source: "windows"
+
+# Permitir reinício automático quando necessário
+windows_update_allow_reboot: true
+
+# Timeout (segundos) para reinício e reconexão
+windows_update_reboot_timeout: 600
