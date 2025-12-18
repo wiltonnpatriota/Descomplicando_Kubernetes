@@ -34,3 +34,14 @@ spec:
           timeoutSeconds: 5
           failureThreshold: 3
           successThreshold: 1
+        readinessProbe:
+          exec:
+            command:
+            - curl
+            - -f
+            - http://localhost:80/
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
