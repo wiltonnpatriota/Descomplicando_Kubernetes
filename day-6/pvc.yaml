@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    pvc: meu-pvc
+  name: giropops-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce #
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: giropops-storage
+  selector:
+    matchLabels:
+      type: nfs
